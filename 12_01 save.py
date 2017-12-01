@@ -12,7 +12,6 @@
 #  Supports 16x2 and 20x4 screens.
 #
 # Author : Matt Hawkins
-
 # Date   : 20/09/2015
 #
 # http://www.raspberrypi-spy.co.uk/
@@ -191,7 +190,7 @@ def lcd_string(message,line):
         lcd_byte(ord(message[i]),LCD_CHR)
 
 def main():
-    index = open('index.txt','r')
+    index = open('index2.txt','r')
     indexcontent = int(index.read())
     index.close()
   
@@ -249,22 +248,16 @@ def main():
       
       
         if GPIO.input(16) == 0 :
-            print("move channel")
+            print("16")
             sunse1=sunse1+1
             if(sunse1 == len(musicfolderlist)-1):
                 sunse1=0
             sunse=1
-            
-            
             media=instance.media_new("ftp://192.168.0.107/music2/"+musicfolderlist[sunse1][sunse]+"/"+musicfolderlist[sunse1][sunse])
-            lcd_string("move channeling",LCD_LINE_1)
-            lcd_string("waiting...",LCD_LINE_2)
-            
             player.set_media(media)
             
-            
             player.play()
-          
+                 
               
         if a== 6:
             print("6")
@@ -327,47 +320,11 @@ def main():
             #shutdown
             a = player.get_state()
             player.stop()
-            #reputation
-            print("your last channel is "+str(sunse1)+"\n Are you satisfied?")
-            repu = input("please input score 1~5")
-            if(sunse1==0):
-                indexnum=str(repu)
-                #while t
-                #if GPIO.input(23) == 0 :
-                index = open('index0.txt','a')
-                index.write(indexnum)
-                index.close()
-            
-            elif(sunse1==1):
-                indexnum=str(repu)
-                #while t
-                #if GPIO.input(23) == 0 :
-                index = open('index1.txt','a')
-                index.write(indexnum)
-                index.close()
-            
-            elif(sunse1==2):
-                
-                indexnum=str(repu)
-            
-                index = open('index2.txt','a')
-                index.write(indexnum)
-                index.close()
-            
-            elif(sunse1==3):
-                
-                indexnum=str(repu)
-                #while t
-                #if GPIO.input(23) == 0 :
-                index = open('index3.txt','a')
-                index.write(indexnum)
-                index.close()
-            
            
 
-    os.remove("/home/pi/index.txt")
+    os.remove("/home/pi/index2.txt")
     indexnum=str(sunse1)
-    index = open('index.txt','w')
+    index = open('index2.txt','w')
     index.write(indexnum)
     index.close()
    
